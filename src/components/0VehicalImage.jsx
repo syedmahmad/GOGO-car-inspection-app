@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Card, CardContent,
   Typography,
@@ -10,6 +10,21 @@ import 'react-circular-progressbar/dist/styles.css';
 
 export const VehicalImage = () => {
   const [expanded, setExpanded] = useState(false);
+
+
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Handle the file (e.g., upload it, display it, etc.)
+      console.log(file);
+    }
+  };
 
   const handleCardClick = () => {
     setExpanded(!expanded);
@@ -57,7 +72,15 @@ export const VehicalImage = () => {
                 padding: '10px 10px'
               }}
             >
-              <AddCircleOutlineIcon />
+              <AddCircleOutlineIcon onClick={handleButtonClick}/>
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+              />
             </Grid2>
           </Grid2>
           {expanded && (
