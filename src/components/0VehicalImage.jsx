@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import {
-  Card, CardContent,
-  Typography,
+  Card, CardContent, Typography
 } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -9,12 +8,18 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import 'react-circular-progressbar/dist/styles.css';
 
 export const VehicalImage = () => {
+  /* #region to handle expanded section */
   const [expanded, setExpanded] = useState(false);
+  const handleCardClick = () => {
+    setExpanded(!expanded);
+  };
+  // #endregion
 
+  /* #region to open camera on mobile devices and files folder on desktop */
 
   const fileInputRef = useRef(null);
 
-  const handleButtonClick = () => {
+  const handleCameraAndImage = () => {
     fileInputRef.current.click();
   };
 
@@ -25,10 +30,7 @@ export const VehicalImage = () => {
       console.log(file);
     }
   };
-
-  const handleCardClick = () => {
-    setExpanded(!expanded);
-  };
+  // #endregion
 
   return (
     <Grid2 xs={12}>
@@ -72,7 +74,8 @@ export const VehicalImage = () => {
                 padding: '10px 10px'
               }}
             >
-              <AddCircleOutlineIcon onClick={handleButtonClick}/>
+              <AddCircleOutlineIcon onClick={handleCameraAndImage}/>
+              {/* this hidden field is only to take iamges. */}
               <input
                 type="file"
                 accept="image/*"

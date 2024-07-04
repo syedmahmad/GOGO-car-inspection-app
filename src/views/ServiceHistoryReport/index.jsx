@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomTextField from '../../components/TextField';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import CameraInput from '../../common/CameraInput/Index';
 
 const ServiceHistoryReport = () => {
   const serviceHistoryOptions = [{
@@ -61,7 +61,7 @@ const ServiceHistoryReport = () => {
             />
           </Grid2>
           <Grid2 xs={2} sx={{cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <PhotoCameraIcon sx={{ marginTop: '24px'}} htmlColor='#004494'/>
+            <CameraInput />
           </Grid2>
         </Grid2>
       </Grid2>
@@ -76,7 +76,7 @@ const ServiceHistoryReport = () => {
             />
           </Grid2>
           <Grid2 xs={2} sx={{cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <PhotoCameraIcon sx={{ marginTop: '24px'}} htmlColor='#004494'/>
+            <CameraInput />
           </Grid2>
         </Grid2>
       </Grid2>

@@ -1,8 +1,8 @@
 import React from 'react';
 import CustomTextField from '../../components/TextField';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CameraInput from '../../common/CameraInput/Index';
 
 const VehicalDetails = () => {
   const yearOptions = [
@@ -72,6 +72,7 @@ const VehicalDetails = () => {
       label: 'Fabric - Blue',
     },
   ];
+
   return(
     <Grid2 container gap={2} sx={{ padding: '20px 0px' }}>
       <Grid2 xs={12}>
@@ -82,7 +83,7 @@ const VehicalDetails = () => {
             />
           </Grid2>
           <Grid2 xs={2} sx={{cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <PhotoCameraIcon sx={{ marginTop: '24px'}} htmlColor='#004494'/>
+            <CameraInput />
           </Grid2>
         </Grid2>
       </Grid2>
