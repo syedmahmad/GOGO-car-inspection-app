@@ -5,10 +5,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 import ItemReportsList from '../ItemReportsList';
 import OBDReport from '../OBDReport';
 import ServiceHistoryReport from '../ServiceHistoryReport';
+import TyreMenu from '../TyreReport';
 
-const ReportMain = () => {
+const ReportMain = (props) => {
+  const {
+    setBackButtonText, showReportMainPage, setShowReportMainPage
+  } = props;
   const [componentToShow, setComponentToShow] = useState('');
   const [listToShow, setListToShow] = useState([]);
+
   // TODO: need to replace the dummy data in options
   const reportCategories = [{
     name: 'Electrical Controls',
@@ -458,43 +463,13 @@ const ReportMain = () => {
   },{
     name: 'Tyres',
     image: 'https://static.pakwheels.com/2016/06/car-tires-e1467006521850.png',
-    options: [
-      {
-        name: 'Air Conditioning'
-      },
-      {
-        name: 'Bonnet Shocks and Stay Rod'
-      },
-      {
-        name: 'Coolant'
-      },
-      {
-        name: 'Drive Belt and Pulleys'
-      },
-      {
-        name: 'Engine Noise'
-      },
-      {
-        name: 'Engine Oil Filler Cap'
-      },
-      {
-        name: 'Engine Oil Leaks'
-      },
-      {
-        name: 'Hoses and Pipes'
-      },
-      {
-        name: 'Mountings'
-      },
-      {
-        name: 'Turbo or Supercharger'
-    }],
-    nextComponent: 'list'
+    options: [],
+    nextComponent: 'tyre'
   }];
 
   return (
     <>
-      {listToShow.length === 0 && componentToShow === '' && reportCategories.map((item) => (
+      {showReportMainPage && reportCategories.map((item) => (
         <Grid container>
           <Grid item xs={12}>
             {/* Container for text and image */}
@@ -506,7 +481,10 @@ const ReportMain = () => {
                 cursor: 'pointer',
                 marginTop: '1px'
               }}
-              onClick={() => {setListToShow(item?.options); setComponentToShow(item?.nextComponent)}}
+              onClick={() => {
+                setListToShow(item?.options); setComponentToShow(item?.nextComponent);
+                setBackButtonText('reports'); setShowReportMainPage(false);
+              }}
             >
               <Box
                 sx={{
@@ -553,16 +531,20 @@ const ReportMain = () => {
         </Grid>
       ))}
 
-      {componentToShow === 'list' && listToShow.length > 0 && (
+      {componentToShow === 'list' && !showReportMainPage && listToShow.length > 0 && (
         <ItemReportsList listToShow={listToShow} />
       )}
 
-      {componentToShow === 'obd' && (
+      {componentToShow === 'obd' && !showReportMainPage && (
         <OBDReport />
       )}
 
-      {componentToShow === 'service-history' && (
+      {componentToShow === 'service-history' && !showReportMainPage && (
         <ServiceHistoryReport />
+      )}
+
+      {componentToShow === 'tyre' && !showReportMainPage && (
+        <TyreMenu />
       )}
     </>
   );

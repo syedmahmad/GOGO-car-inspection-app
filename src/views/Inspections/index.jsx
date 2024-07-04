@@ -15,23 +15,39 @@ import { VehicalImage } from '../../components/0VehicalImage';
 import { NotesCard } from '../../components/NotesCard';
 
 export default function Inspection() {
-  const [showVehicalDetails, setShowVehicalDetails] = useState(false);
-  const [showReport, setShowReport] = useState(false);
+  const [componentToShow, setComponentToShow] = useState('inspections');
+  const [backButtonText, setBackButtonText] = useState('');
+  const [showReportMainPage, setShowReportMainPage] = useState(true);
+
+  const handleClickBackButton = () => {
+    debugger;
+    if (backButtonText === 'inspections') {
+      setComponentToShow('inspections');
+      setBackButtonText('') ;
+    } else if (backButtonText === 'reports') {
+      setBackButtonText('inspections') ;
+      setComponentToShow('report');
+      setShowReportMainPage(true);
+    }
+  }
+
   return (
     <Container maxWidth="md" sx={{ height: 'calc(100vh - 20px)', margin: '20px 0px', overflow: 'auto'}}>
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: "center",
-          marginBottom: '20px',
-          cursor: 'pointer'
-        }}
-        onClick={() => {setShowVehicalDetails(false); setShowReport(false)}}
-      >
-        <ChevronLeftIcon />
-        <Typography fontSize="14px">Inspections</Typography>
-      </Box>
-      {!showVehicalDetails && !showReport && (
+      {backButtonText !== '' && (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: "center",
+            marginBottom: '20px',
+            cursor: 'pointer'
+          }}
+          onClick={() => { handleClickBackButton(componentToShow)}}
+        >
+          <ChevronLeftIcon />
+          <Typography fontSize="14px" sx={{ textTransform: 'capitalize' }}>{backButtonText}</Typography>
+        </Box>
+      )}
+      {componentToShow === 'inspections' && (
         <Grid2 container gap={2}>
           {/* 0Vehcial Images Top Card.. */}
          <VehicalImage />
@@ -45,7 +61,7 @@ export default function Inspection() {
               cursor: 'pointer',
               borderRadius: '8px'
             }}
-            onClick={() => setShowVehicalDetails(true)}
+            onClick={() => {setComponentToShow('vehical details'); setBackButtonText('inspections')}}
           >
             <CardContent
               sx={{
@@ -102,7 +118,7 @@ export default function Inspection() {
               cursor: 'pointer',
               borderRadius: '12px'
             }}
-            onClick={() => setShowReport(true)}
+            onClick={() => {setComponentToShow('report'); setBackButtonText('inspections')}}
           >
             <CardContent
               sx={{
@@ -168,12 +184,16 @@ export default function Inspection() {
         </Grid2>
       )}
 
-      {showVehicalDetails && (
+      {componentToShow === 'vehical details' && (
         <VehicleDetails />
       )}
 
-      {showReport && (
-        <ReportMain />
+      {componentToShow === 'report' && (
+        <ReportMain 
+          setBackButtonText={setBackButtonText}
+          showReportMainPage={showReportMainPage}
+          setShowReportMainPage={setShowReportMainPage}
+        />
       )}
     </Container>
     

@@ -27,9 +27,6 @@ export const NotesCard = () => {
             <Grid2
               xs={12}
               sm={10}
-              // sx={{
-              //   display: 'flex',
-              // }}
             >
               <Typography fontSize="14px" fontWeight="600" padding="10px 10px">
                 Notes

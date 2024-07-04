@@ -3,7 +3,7 @@ import {
   InputLabel, MenuItem
 } from "@mui/material";
 
-const StyledInput = styled(TextField)(({ theme }) => ({
+const StyledInput = styled(TextField)(({ theme, variant }) => ({
   'label + &': {
     marginTop: theme.spacing(3),
   },
@@ -24,7 +24,7 @@ const StyledInput = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-input': {
     borderRadius: "8px",
     position: 'relative',
-    backgroundColor: theme.palette.mode === 'light' ? '#F3F6F9' : '#1A2027',
+    backgroundColor: variant !== 'standard' ? '#F3F6F9' : 'transparent',
     border: 'none',
     fontSize: 12,
     padding: '10px 12px',
@@ -44,23 +44,26 @@ const CustomTextField = (props) => {
     onChange,
     select,
     placeholder,
+    variant = 'filled',
     options = []
   } = props;
   return(
     <FormControl variant="standard" fullWidth>
-        <InputLabel
-          shrink
-          sx={{
-            fontSize: '14px',
-            fontWeight: 700,
-            color: '#000'
-          }}
-        >
-          {label}
-        </InputLabel>
+        {label && (
+          <InputLabel
+            shrink
+            sx={{
+              fontSize: '14px',
+              fontWeight: 700,
+              color: '#000'
+            }}
+          >
+            {label}
+          </InputLabel>
+        )}
         <StyledInput
           select={select}
-          variant="filled"
+          variant={variant}
           fullWidth
           value={value}
           onChange={onChange}

@@ -70,7 +70,6 @@ export const VehicalImage = () => {
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                // alignItems: 'center',
                 padding: '10px 10px'
               }}
             >
