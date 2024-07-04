@@ -1,4 +1,4 @@
-# GOGO Inspection App: GOGO Car Inspection Frontend App
+# GGIA: GOGO Car Inspection Frontend App
 
 ## About the Project
 
